@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.DispatcherServlet;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,7 +15,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.persistence.EntityManagerFactory;
+
 @SpringBootApplication
+@EnableTransactionManagement
 @EnableSwagger2
 public class Boot {
 
@@ -27,7 +33,7 @@ public class Boot {
 
     @Bean
     public ServletRegistrationBean dispatcherServletRegistration() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet(), "/api/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet(), "/tracker/api/*");
         servletRegistrationBean.setName(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME);
         return servletRegistrationBean;
     }
@@ -35,6 +41,13 @@ public class Boot {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
+    }
+
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager txm = new JpaTransactionManager(emf);
+        return txm;
     }
 
 }
