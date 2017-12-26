@@ -4,12 +4,17 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * This is an entity class that is used to store all the reading for a {@link Vehicle} object.
+ *
+ * @author Deepak Shankar
+ */
 @Entity
 @Table(name = "READINGS")
 public class Reading {
 
     @Id
-    @Column(name="READING_ID")
+    @Column(name = "READING_ID")
     private String id;
 
     @Column(name = "VIN")
@@ -46,10 +51,10 @@ public class Reading {
     private int engineRpm;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="TIRE_ID")
+    @JoinColumn(name = "TIRE_ID")
     private Tires tires;
 
-    public Reading(){
+    public Reading() {
         this.id = UUID.randomUUID().toString();
     }
 

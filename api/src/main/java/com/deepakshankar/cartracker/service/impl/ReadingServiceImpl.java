@@ -12,6 +12,12 @@ import com.deepakshankar.cartracker.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This is a service implementation of {@link ReadingService} that provides the necessary business logic to handle
+ * all the services that are needed to handle {@link Reading} objects.
+ *
+ * @author Deepak Shankar
+ */
 @Service
 public class ReadingServiceImpl implements ReadingService {
 
@@ -24,6 +30,19 @@ public class ReadingServiceImpl implements ReadingService {
     @Autowired
     private AlertDao alertDao;
 
+    /**
+     * This provides the implementation to create a new {@link Reading} record and also create {@link Alert}s based
+     * on the conditions defined below.
+     * <code>
+     * Alert: engineRpm > readlineRpm, Priority: HIGH
+     * Alert: fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM
+     * Alert: tire pressure of any tire < 32psi || > 36psi , Priority: LOW
+     * Alert: engineCoolantLow = true || checkEngineLightOn = true, Priority: LOW
+     * </code>
+     * This method uses {@link VehicleDao} and {@link AlertDao} to persist the records.
+     *
+     * @param reading The {@link Reading} object to be created.
+     */
     @Override
     public void create(final Reading reading) {
 
@@ -56,7 +75,7 @@ public class ReadingServiceImpl implements ReadingService {
                     alert.setVehicle(vehicle);
                     alertDao.save(alert);
                 }
-                if (reading.isEngineCoolantLow()||reading.isCheckEngineLightOn()) {
+                if (reading.isEngineCoolantLow() || reading.isCheckEngineLightOn()) {
                     Alert alert = new Alert();
                     alert.setType(AlertType.LOW);
                     alert.setMessage("Check engine! Refill coolant or service engine!");

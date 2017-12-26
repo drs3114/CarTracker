@@ -3,6 +3,11 @@ package com.deepakshankar.cartracker.entity;
 import javax.persistence.*;
 import java.util.UUID;
 
+/**
+ * This is an entity class that is used to create and store alerts for a vehicle when some specific events occur.
+ *
+ * @author Deepak Shankar
+ */
 @Entity
 @Table(name = "ALERTS")
 public class Alert {

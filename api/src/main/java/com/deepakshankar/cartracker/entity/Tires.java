@@ -2,13 +2,19 @@ package com.deepakshankar.cartracker.entity;
 
 import javax.persistence.*;
 
+/**
+ * This is a weak entity that is used by the {@link Reading} class to store the reading of tire pressures for a
+ * {@link Vehicle} object.
+ *
+ * @author Deepak Shankar
+ */
 @Entity
 @Table(name = "TIRES")
 public class Tires {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="TIRE_ID")
+    @Column(name = "TIRE_ID")
     private long tireId;
 
     @Column(name = "FRONT_LEFT")

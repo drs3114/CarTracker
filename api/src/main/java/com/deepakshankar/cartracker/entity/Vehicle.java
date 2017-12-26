@@ -6,7 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-
+/**
+ * This is an entity that is used to store the vehicles.
+ *
+ * @author Deepak Shankar
+ */
 @Entity
 @Table(name = "VEHICLES")
 public class Vehicle {
