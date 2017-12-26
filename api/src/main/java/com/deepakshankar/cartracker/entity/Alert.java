@@ -1,6 +1,7 @@
 package com.deepakshankar.cartracker.entity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "ALERTS")
@@ -11,21 +12,25 @@ public class Alert {
     private String id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="VIN")
-    private Vehicle vin;
+    @JoinColumn(name = "VIN")
+    private Vehicle vehicle;
 
-    @Column(name="MESSAGE")
+    @Column(name = "MESSAGE")
     private String message;
 
     @Column(name = "TYPE")
     private AlertType type;
 
-    public Vehicle getVin() {
-        return vin;
+    public Alert() {
+        this.id = UUID.randomUUID().toString();
     }
 
-    public void setVin(Vehicle vin) {
-        this.vin = vin;
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public String getMessage() {

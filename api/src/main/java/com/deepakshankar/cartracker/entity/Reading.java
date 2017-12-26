@@ -2,12 +2,16 @@ package com.deepakshankar.cartracker.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "READINGS")
 public class Reading {
 
     @Id
+    @Column(name="READING_ID")
+    private String id;
+
     @Column(name = "VIN")
     private String vin;
 
@@ -44,6 +48,10 @@ public class Reading {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="TIRE_ID")
     private Tires tires;
+
+    public Reading(){
+        this.id = UUID.randomUUID().toString();
+    }
 
     public String getVin() {
         return vin;
