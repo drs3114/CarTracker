@@ -1,16 +1,36 @@
 package com.deepakshankar.cartracker.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 
+@Entity
+@Table(name = "VEHICLES")
 public class Vehicle {
 
+    @Id
+    @Column(name = "VIN")
     private String vin;
+
+    @Column(name = "MAKE")
     private String make;
+
+    @Column(name = "MODEL")
     private String model;
+
+    @Column(name = "YEAR")
     private int year;
+
+    @Column(name = "REDLINE_RPM")
     private int readlineRpm;
+
+    @Column(name = "MAX_FUEL_VOLUME")
     private int maxFuelVolume;
+
+    @Column(name = "LAST_SERVICE_DATE")
     private Date lastServiceDate;
 
     public String getVin() {

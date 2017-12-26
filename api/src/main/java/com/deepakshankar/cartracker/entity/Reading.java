@@ -1,27 +1,55 @@
 package com.deepakshankar.cartracker.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "READINGS")
 public class Reading {
 
-    private Vehicle vin;
+    @Id
+    @Column(name = "VIN")
+    private String vin;
+
+    @Column(name = "LATITUDE")
     private double latitude;
+
+    @Column(name = "LONGITUDE")
     private double longitude;
+
+    @Column(name = "TIMESTAMP", nullable = false)
     private Date timestamp;
+
+    @Column(name = "FUEL_VOLUME")
     private float fuelVolume;
+
+    @Column(name = "SPEED")
     private int speed;
+
+    @Column(name = "ENGINE_HP")
     private int engineHp;
+
+    @Column(name = "CHK_ENG_LIGHT_ON")
     private boolean checkEngineLightOn;
+
+    @Column(name = "ENG_CLNT_LOW")
     private boolean engineCoolantLow;
+
+    @Column(name = "CRUISE_CTRL")
     private boolean cruiseControlOn;
+
+    @Column(name = "ENG_RPM")
     private int engineRpm;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="TIRE_ID")
     private Tires tires;
 
-    public Vehicle getVin() {
+    public String getVin() {
         return vin;
     }
 
-    public void setVin(Vehicle vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
