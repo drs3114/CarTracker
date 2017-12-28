@@ -1,6 +1,8 @@
 package com.deepakshankar.cartracker.controller;
 
+import com.deepakshankar.cartracker.entity.Alert;
 import com.deepakshankar.cartracker.entity.Vehicle;
+import com.deepakshankar.cartracker.service.AlertService;
 import com.deepakshankar.cartracker.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class VehicleController {
 
     @Autowired
     private VehicleService vehicleService;
+
+    @Autowired
+    private AlertService alertService;
 
     /**
      * This method is used to get all the {@link Vehicle} objects stored in the DB.
@@ -97,5 +102,21 @@ public class VehicleController {
 
     }
 
+    /**
+     * This method is used to get the alerts for a given vehicle. An optional request parameter called "priority" can
+     * be used to filter the alerts on LOW, MEDIUM and HIGH priority alerts.
+     *
+     * @param vin      the vin number of the vehicle
+     * @param priority the {@link com.deepakshankar.cartracker.entity.AlertType} defining the priority of the alert
+     * @return a list of {@link Alert}s for the given vehicle.
+     */
+    @GetMapping(path = "{id}/alerts")
+    public List<Alert> getAlertsForVin(@PathVariable("id") final String vin, @RequestParam("priority") final String
+            priority) {
 
+        if (priority != null || priority != "") {
+            return alertService.getPriorityAlertsForVin(vin, priority);
+        }
+        return alertService.getAlertsForVin(vin);
+    }
 }
