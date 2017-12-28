@@ -50,10 +50,10 @@ public class ReadingServiceImpl implements ReadingService {
             Vehicle vehicle = vehicleDao.findOne(reading.getVin());
             if (vehicle != null) {
                 readingDao.save(reading);
-                if (reading.getEngineRpm() > vehicle.getReadlineRpm()) {
+                if (reading.getEngineRpm() > vehicle.getRedlineRpm()) {
                     Alert alert = new Alert();
                     alert.setType(AlertType.HIGH);
-                    alert.setMessage("Engine RPM is: " + reading.getEngineRpm() + ". The red line RPM is: " + vehicle.getReadlineRpm() + ".");
+                    alert.setMessage("Engine RPM is: " + reading.getEngineRpm() + ". The red line RPM is: " + vehicle.getRedlineRpm() + ".");
                     alert.setVehicle(vehicle);
                     alertDao.save(alert);
                 }
