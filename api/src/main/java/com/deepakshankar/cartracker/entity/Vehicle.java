@@ -29,7 +29,7 @@ public class Vehicle {
     private int year;
 
     @Column(name = "REDLINE_RPM")
-    private int readlineRpm;
+    private int redlineRpm;
 
     @Column(name = "MAX_FUEL_VOLUME")
     private int maxFuelVolume;
@@ -69,12 +69,12 @@ public class Vehicle {
         this.year = year;
     }
 
-    public int getReadlineRpm() {
-        return readlineRpm;
+    public int getRedlineRpm() {
+        return redlineRpm;
     }
 
-    public void setReadlineRpm(int readlineRpm) {
-        this.readlineRpm = readlineRpm;
+    public void setRedlineRpm(int redlineRpm) {
+        this.redlineRpm = redlineRpm;
     }
 
     public int getMaxFuelVolume() {
@@ -92,4 +92,5 @@ public class Vehicle {
     public void setLastServiceDate(Date lastServiceDate) {
         this.lastServiceDate = lastServiceDate;
     }
+
 }
