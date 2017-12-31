@@ -111,8 +111,8 @@ public class VehicleController {
      * @return a list of {@link Alert}s for the given vehicle.
      */
     @GetMapping(path = "{id}/alerts")
-    public List<Alert> getAlertsForVin(@PathVariable("id") final String vin, @RequestParam("priority") final String
-            priority) {
+    public List<Alert> getAlertsForVin(@PathVariable("id") final String vin, @RequestParam(value = "priority",
+            required = false) final String priority) {
 
         if (priority != null || priority != "") {
             return alertService.getPriorityAlertsForVin(vin, priority);
