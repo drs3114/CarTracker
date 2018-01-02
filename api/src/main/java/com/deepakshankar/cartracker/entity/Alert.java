@@ -1,6 +1,7 @@
 package com.deepakshankar.cartracker.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -25,8 +26,12 @@ public class Alert {
     @Column(name = "TYPE")
     private AlertType type;
 
+    @Column(name = "TIME")
+    private LocalDateTime time;
+
     public Alert() {
         this.id = UUID.randomUUID().toString();
+        this.time = LocalDateTime.now();
     }
 
     public String getId() {
@@ -59,5 +64,13 @@ public class Alert {
 
     public void setType(AlertType type) {
         this.type = type;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 }
