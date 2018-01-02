@@ -98,6 +98,7 @@ public class VehicleController {
     @RequestMapping(method = RequestMethod.DELETE, path = "{id}")
     public void delete(@PathVariable("id") final String vin, @RequestBody final Vehicle vehicle) {
 
+        alertService.deleteAlertsForVehicle(vehicle);
         vehicleService.delete(vin, vehicle);
 
     }
@@ -114,7 +115,7 @@ public class VehicleController {
     public List<Alert> getAlertsForVin(@PathVariable("id") final String vin, @RequestParam(value = "priority",
             required = false) final String priority) {
 
-        if (priority != null || priority != "") {
+        if (priority != null && priority != "") {
             return alertService.getPriorityAlertsForVin(vin, priority);
         }
         return alertService.getAlertsForVin(vin);
