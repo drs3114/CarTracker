@@ -16,8 +16,7 @@ public class Alert {
     @Column(name = "ALERT_ID")
     private String id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "VIN")
+    @ManyToOne()
     private Vehicle vehicle;
 
     @Column(name = "MESSAGE")

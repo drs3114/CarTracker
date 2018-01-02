@@ -14,5 +14,5 @@ public interface ReadingService {
      *
      * @param reading The {@link Reading} object to be created.
      */
-    public void create(final Reading reading);
+    public Reading create(final Reading reading);
 }

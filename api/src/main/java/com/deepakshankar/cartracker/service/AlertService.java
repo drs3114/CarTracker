@@ -2,6 +2,7 @@ package com.deepakshankar.cartracker.service;
 
 import com.deepakshankar.cartracker.entity.Alert;
 import com.deepakshankar.cartracker.entity.AlertType;
+import com.deepakshankar.cartracker.entity.Reading;
 import com.deepakshankar.cartracker.entity.Vehicle;
 
 import java.util.List;
@@ -65,4 +66,22 @@ public interface AlertService {
      * @return the alert
      */
     Alert getAlert(final String id);
+
+    /**
+     * implement this method to create a new alert
+     *
+     * @param alert the alert to be created.
+     */
+    public void create(Alert alert);
+
+    /**
+     * implement this method to create alerts for the given reading
+     *
+     * @param reading the reading object used to create alerts
+     */
+    public void createAlertForReading(Reading reading);
+
+    public void delete(Alert alert);
+
+    public void deleteAlertsForVehicle(final Vehicle vehicle);
 }

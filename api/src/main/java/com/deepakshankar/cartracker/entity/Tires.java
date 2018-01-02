@@ -12,6 +12,9 @@ import javax.persistence.*;
 @Table(name = "TIRES")
 public class Tires {
 
+    public static final int MIN_TIRE_PRESSURE = 32;
+    public static final int MAX_TIRE_PRESSURE = 36;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TIRE_ID")
