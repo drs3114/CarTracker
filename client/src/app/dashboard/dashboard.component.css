@@ -6,3 +6,12 @@
   background-image: url('../../assets/car.png');
   background-size: cover;
 }
+
+mat-card-title {
+  color: lightslategrey;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  font-style: italic;
+}
