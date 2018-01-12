@@ -40,3 +40,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+ ../api/.idea/
+ ../api/api.iml
+ ../api/git.log
+ ../api/target/
