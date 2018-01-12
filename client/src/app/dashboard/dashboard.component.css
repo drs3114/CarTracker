@@ -1,0 +1,8 @@
+.card {
+  width: 300px;
+}
+
+.header-image {
+  background-image: url('../../assets/car.png');
+  background-size: cover;
+}
