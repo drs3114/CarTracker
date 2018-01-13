@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Car} from '../models/car';
-import {CarService} from '../car.service';
+import {Car} from '../../models/car';
+import {CarService} from '../../services/car.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {AlertsService} from '../alerts.service';
-import {CarAlerts} from '../models/car.alerts';
-import {Alert} from '../models/alert';
+import {AlertsService} from '../../services/alerts.service';
+import {CarAlerts} from '../../models/car.alerts';
+import {Alert} from '../../models/alert';
 import {log} from 'util';
 
 @Component({

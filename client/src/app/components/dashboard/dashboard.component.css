@@ -1,0 +1,27 @@
+.card {
+  width: 300px;
+}
+
+.header-image {
+  background-image: url('../../../assets/car.png');
+  background-size: cover;
+}
+
+mat-card-title {
+  color: lightslategrey;
+  font-weight: bold;
+  font-size: medium;
+}
+
+mat-card-subtitle {
+  font-style: italic;
+  font-size: medium;
+}
+
+span {
+  font-size: large
+}
+
+mat-grid-list {
+  padding-top: 5%;
+}
