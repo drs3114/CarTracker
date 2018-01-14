@@ -19,3 +19,8 @@ mat-toolbar {
 a {
   color: aliceblue;
 }
+
+span {
+  padding-left: 2%;
+  padding-right: 2%;
+}
