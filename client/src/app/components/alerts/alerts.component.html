@@ -1,39 +1,103 @@
-<div class="container">
+<div class="custom-container">
 
-  <div class="row adjust-fix">
-    <div class="col-md-4" align="center">
+  <div class="row adjust-fix custom-container">
+    <div class="col">
       <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar class="header-image"></div>
-          <mat-card-title>{{car.make}}</mat-card-title>
-          <mat-card-subtitle>{{car.model}}</mat-card-subtitle>
+          <mat-card-title>{{car.make}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            <small>{{car.model}}</small>
+          </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <img mat-card-image src="../../../assets/car.png" alt="{{car.make}} {{car.model}}">
+          <a mat-raised-button color="accent" routerLink="/dashboard">Dashboard</a>
+          <a class="float-right" mat-mini-fab color="accent"><i class="fas fa-envelope"></i></a>
         </mat-card-content>
-        <mat-card-actions>
-          <div align="center">
-            <button mat-button color="primary" (click)="openCar(car)">Details</button>
-          </div>
-        </mat-card-actions>
       </mat-card>
     </div>
-    <div class="col-md-8">
+  </div>
+  <div class="row custom-container">
+    <div class="col-md-6" align="center">
+      <div class="row">
+
+        <div class="col">
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-md-6">
       <mat-tab-group>
         <mat-tab color="accent">
           <ng-template mat-tab-label>
             <span> High Priority Alerts</span>
           </ng-template>
+          <div>
+            <table datatable [dtTrigger]="highAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of highPriorityAlerts">
+                <td><span class="badge badge-danger">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <span> Medium Priority Alerts</span>
           </ng-template>
+          <div>
+            <table datatable [dtTrigger]="mediumAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of mediumPriorityAlerts">
+                <td><span class="badge badge-warning">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <span> Low Priority Alerts</span>
           </ng-template>
+          <div>
+            <table datatable [dtTrigger]="lowAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of lowPriorityAlerts">
+                <td><span class="badge badge-dark">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </mat-tab>
       </mat-tab-group>
     </div>

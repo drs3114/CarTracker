@@ -3,15 +3,25 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatGridListModule, MatToolbarModule} from '@angular/material';
-import {CarDialogComponent, DashboardComponent} from './dashboard/dashboard.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {CarService} from './car.service';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule, MatListModule,
+  MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
+import {CarDialogComponent, DashboardComponent} from './components/dashboard/dashboard.component';
+import {CarService} from './services/car.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AlertsComponent } from './alerts/alerts.component';
-import { AlertsService } from './alerts.service';
+import {AlertsComponent} from './components/alerts/alerts.component';
+import {AlertsService} from './services/alerts.service';
+import {DataTablesModule} from 'angular-datatables';
+import {AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -31,7 +41,12 @@ import { AlertsService } from './alerts.service';
     MatButtonModule,
     MatDialogModule,
     AppRoutingModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTabsModule,
+    MatIconModule,
+    MatListModule,
+    DataTablesModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDfqFKXWLRFSg8UMeNdvNDsROxGz4C68j8'})
   ],
   providers: [CarService, AlertsService],
   entryComponents: [

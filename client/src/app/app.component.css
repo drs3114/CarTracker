@@ -6,6 +6,12 @@
   flex: 1 1 auto;
 }
 
+mat-toolbar{
+  position: fixed;
+  background-attachment: fixed;
+  z-index: 100;
+}
+
 *{
   font-family: 'Quattrocento Sans', sans-serif;
 }

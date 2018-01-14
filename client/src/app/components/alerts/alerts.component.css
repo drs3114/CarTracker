@@ -1,9 +1,16 @@
+.custom-container {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .adjust-fix {
-  padding-top: 10%;
+  padding-top: 5%;
+  padding-bottom: 1%;
+
 }
 
 .card {
-  width: 300px;
+  width: inherit;
 }
 
 .header-image {
@@ -20,5 +27,10 @@ mat-card-title {
 mat-card-subtitle {
   font-style: italic;
   font-size: medium;
+}
+
+agm-map {
+  height: 600px;
+  width: inherit;
 }
 

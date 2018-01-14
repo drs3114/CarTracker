@@ -5,5 +5,5 @@ export class Alert {
   vehicle: Car;
   message: string;
   type: string;
-  time: Date;
+  time: any;
 }
