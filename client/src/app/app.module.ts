@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatCheckboxModule,
   MatChipsModule,
   MatDialogModule,
   MatGridListModule,
@@ -47,6 +47,7 @@ import {ReadingsService} from './services/readings.service';
     MatIconModule,
     MatListModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
     DataTablesModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDfqFKXWLRFSg8UMeNdvNDsROxGz4C68j8'})
   ],
