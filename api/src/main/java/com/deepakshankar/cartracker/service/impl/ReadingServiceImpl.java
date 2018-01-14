@@ -9,6 +9,8 @@ import com.deepakshankar.cartracker.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * This is a service implementation of {@link ReadingService} that provides the necessary business logic to handle
  * all the services that are needed to handle {@link Reading} objects.
@@ -52,6 +54,23 @@ public class ReadingServiceImpl implements ReadingService {
             throw new BadRequestException("Reading cannot be empty!");
         }
         return savedReading;
+    }
+
+    /**
+     * This method should be implemented by any ReadingService implementation to get {@link Reading}s for any vehicle
+     * with specified vin number.
+     *
+     * @param vin the vin of the {@link Vehicle}
+     * @return list of {@link Reading}s for the vehicle
+     */
+    @Override
+    public List<Reading> getReadingsForVehicle(String vin) {
+        final Vehicle vehicle = vehicleDao.findOne(vin);
+        if (vehicle == null) {
+            throw new BadRequestException("Invalid vehicle id!");
+        } else {
+            return readingDao.findReadingsByVin(vin);
+        }
     }
 
 }
