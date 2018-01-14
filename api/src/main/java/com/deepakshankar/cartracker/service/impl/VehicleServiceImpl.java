@@ -29,7 +29,11 @@ public class VehicleServiceImpl implements VehicleService {
      */
     @Override
     public Vehicle findOne(final String id) {
+        final Vehicle vehicle = vehicleDao.findOne(id);
 
+        if (vehicle == null) {
+            throw new VehicleNotFoundException();
+        }
         return vehicleDao.findOne(id);
 
     }
