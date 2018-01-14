@@ -34,3 +34,26 @@ agm-map {
   width: inherit;
 }
 
+mat-tab-group {
+  width: inherit;
+}
+
+a {
+  padding-right: 1px;
+  padding-left: 1px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+mat-slide-toggle {
+  color: mediumvioletred;
+}
+
+.message{
+  padding-top: 50%;
+  padding-bottom: 50%;
+  background-color: darkgrey;
+}

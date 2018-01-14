@@ -12,26 +12,21 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <a mat-raised-button color="accent" routerLink="/dashboard">Dashboard</a>
-          <a class="float-right" mat-mini-fab color="accent"><i class="fas fa-envelope"></i></a>
+          <div class="row">
+            <div class="col-md-10">
+              <a mat-raised-button color="accent" routerLink="/dashboard">Dashboard</a>
+            </div>
+            <div class="col-md-2 button-row">
+              <a class="float-right" mat-mini-fab color="accent"><i class="fas fa-chart-line"></i></a>
+              <a class="float-right" mat-mini-fab color="accent"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
   <div class="row custom-container">
-    <div class="col-md-6" align="center">
-      <div class="row">
-
-        <div class="col">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
-        </div>
-
-      </div>
-
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-9">
       <mat-tab-group>
         <mat-tab color="accent">
           <ng-template mat-tab-label>
@@ -99,7 +94,111 @@
             </table>
           </div>
         </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span> Readings</span>
+          </ng-template>
+          <div>
+            <table datatable [dtTrigger]="readingsDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Fuel Volume</th>
+                <th scope="col">Speed</th>
+                <th scope="col">Engine HP</th>
+                <th scope="col">Engine Light</th>
+                <th scope="col">Engine Coolant Low</th>
+                <th scope="col">Cruise Control</th>
+                <th scope="col">Engine RPM</th>
+                <th scope="col">Tires</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let reading of readings" (click)="updateMaps(reading)">
+                <td><span class="badge badge-success">{{reading.timestamp.toLocaleString()}}</span></td>
+                <td><span>{{reading.fuelVolume}}</span></td>
+                <td><span>{{reading.speed}}</span></td>
+                <td><span>{{reading.engineHp}}</span></td>
+                <td *ngIf="reading.checkEngineLightOn">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="true"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td *ngIf="!reading.checkEngineLightOn">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="false"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td *ngIf="reading.engineCoolantLow">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="true"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td *ngIf="!reading.engineCoolantLow">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="false"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td *ngIf="reading.cruiseControlOn">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="true"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td *ngIf="!reading.cruiseControlOn">
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked="false"
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td><span>{{reading.engineRpm}}</span></td>
+                <td>
+                  <code>{{reading.tires.frontRight}}</code>
+                  <code>{{reading.tires.frontLeft}}</code>
+                  <code>{{reading.tires.rearRight}}</code>
+                  <code>{{reading.tires.rearLeft}}</code>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
       </mat-tab-group>
+    </div>
+    <div class="col-md-3" align="center">
+      <div class="row">
+        <div *ngIf="readingSelected" class="col">
+          <agm-map [latitude]="lat" [longitude]="long">
+            <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+          </agm-map>
+        </div>
+        <div *ngIf="!readingSelected" class="col message">
+          <mat-card>Select a reading to display Maps!</mat-card>
+        </div>
+      </div>
     </div>
   </div>
 

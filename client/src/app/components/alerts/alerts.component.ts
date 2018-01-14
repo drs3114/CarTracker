@@ -6,6 +6,9 @@ import {Alert} from '../../models/alert';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subject} from 'rxjs/Subject';
+import {MatDialog} from '@angular/material';
+import {Reading} from '../../models/reading';
+import {ReadingsService} from '../../services/readings.service';
 
 @Component({
   selector: 'app-alerts',
@@ -18,18 +21,21 @@ export class AlertsComponent implements OnInit {
   highPriorityAlerts: Alert[] = [];
   mediumPriorityAlerts: Alert[] = [];
   lowPriorityAlerts: Alert[] = [];
-  highAlertDtTrigger: Subject<any> = new Subject();
-  mediumAlertDtTrigger: Subject<any> = new Subject();
-  lowAlertDtTrigger: Subject<any> = new Subject();
-
-  title = 'My first AGM project';
-  lat = 51.678418;
-  lng = 7.809007;
+  readings: Reading[] = [];
+  highAlertDtTrigger: Subject<any> = new Subject<any>();
+  mediumAlertDtTrigger: Subject<any> = new Subject<any>();
+  lowAlertDtTrigger: Subject<any> = new Subject<any>();
+  readingsDtTrigger: Subject<any> = new Subject<any>();
+  readingSelected = false;
+  lat = 0;
+  long = 0;
 
   constructor(private carService: CarService,
               private alertService: AlertsService,
+              private readingService: ReadingsService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              public dialog: MatDialog) {
   }
 
   fetch(): void {
@@ -39,6 +45,7 @@ export class AlertsComponent implements OnInit {
       this.getHighPriorityAlerts();
       this.getMediumPriorityAlerts();
       this.getLowPriorityAlerts();
+      this.getReadings();
     });
   }
 
@@ -51,6 +58,7 @@ export class AlertsComponent implements OnInit {
       this.highPriorityAlerts.sort((a, b) => {
         return a.time - b.time;
       });
+      this.highPriorityAlerts.reverse();
       this.highAlertDtTrigger.next();
     });
   }
@@ -66,6 +74,7 @@ export class AlertsComponent implements OnInit {
       this.mediumPriorityAlerts.sort((a, b) => {
         return a.time - b.time;
       });
+      this.mediumPriorityAlerts.reverse();
       this.mediumAlertDtTrigger.next();
     });
   }
@@ -79,6 +88,7 @@ export class AlertsComponent implements OnInit {
       this.lowPriorityAlerts.sort((a, b) => {
         return a.time - b.time;
       });
+      this.lowPriorityAlerts.reverse();
       this.lowAlertDtTrigger.next();
     });
   }
@@ -90,6 +100,26 @@ export class AlertsComponent implements OnInit {
       dateTime.hour + ':' +
       dateTime.minute + ':' +
       dateTime.second);
+  }
+
+  getReadings(): void {
+    this.readingService.getReadingsForVin(this.car.vin).subscribe(readings => {
+      this.readings = readings;
+      this.readings.forEach(reading => {
+        reading.timestamp = new Date(reading.timestamp);
+      });
+      this.readings.sort((a, b) => {
+        return a.timestamp - b.timestamp;
+      });
+      this.readings.reverse();
+      this.readingsDtTrigger.next();
+    });
+  }
+
+  updateMaps(reading: Reading): void {
+    this.readingSelected = true;
+    this.lat = reading.latitude;
+    this.long = reading.longitude;
   }
 
   ngOnInit() {
