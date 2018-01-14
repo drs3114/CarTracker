@@ -9,7 +9,7 @@ import {
   MatChipsModule,
   MatDialogModule,
   MatGridListModule,
-  MatIconModule, MatListModule,
+  MatIconModule, MatListModule, MatSlideToggleModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -22,6 +22,7 @@ import {AlertsComponent} from './components/alerts/alerts.component';
 import {AlertsService} from './services/alerts.service';
 import {DataTablesModule} from 'angular-datatables';
 import {AgmCoreModule} from '@agm/core';
+import {ReadingsService} from './services/readings.service';
 
 
 @NgModule({
@@ -45,10 +46,11 @@ import {AgmCoreModule} from '@agm/core';
     MatTabsModule,
     MatIconModule,
     MatListModule,
+    MatSlideToggleModule,
     DataTablesModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDfqFKXWLRFSg8UMeNdvNDsROxGz4C68j8'})
   ],
-  providers: [CarService, AlertsService],
+  providers: [CarService, AlertsService, ReadingsService],
   entryComponents: [
     DashboardComponent,
     CarDialogComponent],
