@@ -1,6 +1,7 @@
 package com.deepakshankar.cartracker.controller;
 
 import com.deepakshankar.cartracker.entity.Reading;
+import com.deepakshankar.cartracker.exceptions.BadRequestException;
 import com.deepakshankar.cartracker.service.AlertService;
 import com.deepakshankar.cartracker.service.ReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,10 @@ public class ReadingController {
 
     @GetMapping(path = "{id}")
     public List<Reading> getReadingsForVehicle(@PathVariable("id") final String id) {
-        return null;
+        if (id != null && id != "") {
+            return readingService.getReadingsForVehicle(id);
+        } else {
+            throw new BadRequestException("Invalid id specified");
+        }
     }
 }
