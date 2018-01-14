@@ -7,10 +7,9 @@
           <mat-card-title>{{carAlert.car.make}}</mat-card-title>
           <mat-card-subtitle>{{carAlert.car.model}}</mat-card-subtitle>
         </mat-card-header>
-        <!--<img mat-card-image src="../../assets/car.png" alt="{{car.make}} {{car.model}}">-->
         <mat-card-content>
           <div align="center">
-            <span class="badge badge-danger badge-block">High Alerts: {{carAlert['highAlerts'].length}}</span>
+            <span class="badge badge-danger badge-block">High Alerts: {{carAlert.highAlerts.length}}</span>
             <span class="badge badge-warning badge-block">Medium Alerts: {{carAlert.mediumAlerts.length}}</span>
             <span class="badge badge-info badge-block">Low Alerts: {{carAlert.lowAlerts.length}}</span>
           </div>
