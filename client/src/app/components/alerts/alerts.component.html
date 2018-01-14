@@ -26,6 +26,18 @@
     </div>
   </div>
   <div class="row custom-container">
+    <div class="col-md-3" align="center">
+      <div class="row">
+        <div *ngIf="readingSelected" class="col">
+          <agm-map [latitude]="lat" [longitude]="long">
+            <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+          </agm-map>
+        </div>
+        <div *ngIf="!readingSelected" class="col message">
+          <mat-card>Select a reading to display Maps!</mat-card>
+        </div>
+      </div>
+    </div>
     <div class="col-md-9">
       <mat-tab-group>
         <mat-tab color="accent">
@@ -187,18 +199,6 @@
           </div>
         </mat-tab>
       </mat-tab-group>
-    </div>
-    <div class="col-md-3" align="center">
-      <div class="row">
-        <div *ngIf="readingSelected" class="col">
-          <agm-map [latitude]="lat" [longitude]="long">
-            <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
-          </agm-map>
-        </div>
-        <div *ngIf="!readingSelected" class="col message">
-          <mat-card>Select a reading to display Maps!</mat-card>
-        </div>
-      </div>
     </div>
   </div>
 
