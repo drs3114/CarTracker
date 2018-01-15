@@ -9,7 +9,7 @@ import {
   MatChipsModule,
   MatDialogModule,
   MatGridListModule,
-  MatIconModule, MatListModule, MatSlideToggleModule,
+  MatIconModule, MatListModule, MatSelectModule, MatSlideToggleModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -23,6 +23,9 @@ import {AlertsService} from './services/alerts.service';
 import {DataTablesModule} from 'angular-datatables';
 import {AgmCoreModule} from '@agm/core';
 import {ReadingsService} from './services/readings.service';
+import {ChartsModule} from 'ng2-charts';
+import {ChartComponent} from './components/chart/chart.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -30,10 +33,12 @@ import {ReadingsService} from './services/readings.service';
     AppComponent,
     DashboardComponent,
     CarDialogComponent,
-    AlertsComponent
+    AlertsComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatToolbarModule,
@@ -48,13 +53,17 @@ import {ReadingsService} from './services/readings.service';
     MatListModule,
     MatSlideToggleModule,
     MatCheckboxModule,
+    MatSelectModule,
     DataTablesModule,
+    ChartsModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDfqFKXWLRFSg8UMeNdvNDsROxGz4C68j8'})
   ],
   providers: [CarService, AlertsService, ReadingsService],
   entryComponents: [
     DashboardComponent,
-    CarDialogComponent],
+    CarDialogComponent,
+    ChartComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

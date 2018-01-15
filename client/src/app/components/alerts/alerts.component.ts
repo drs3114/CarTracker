@@ -9,6 +9,7 @@ import {Subject} from 'rxjs/Subject';
 import {MatDialog} from '@angular/material';
 import {Reading} from '../../models/reading';
 import {ReadingsService} from '../../services/readings.service';
+import {ChartComponent} from '../chart/chart.component';
 
 @Component({
   selector: 'app-alerts',
@@ -42,6 +43,7 @@ export class AlertsComponent implements OnInit {
     const vin = this.route.snapshot.paramMap.get('vin');
     this.carService.getCar(vin).subscribe(car => {
       this.car = car;
+      this.car.lastServiceDate = new Date(this.car.lastServiceDate);
       this.getHighPriorityAlerts();
       this.getMediumPriorityAlerts();
       this.getLowPriorityAlerts();
@@ -120,6 +122,10 @@ export class AlertsComponent implements OnInit {
     this.readingSelected = true;
     this.lat = reading.latitude;
     this.long = reading.longitude;
+  }
+
+  displayChart(): void {
+    this.dialog.open(ChartComponent, {width: '800px', data: this.readings});
   }
 
   ngOnInit() {

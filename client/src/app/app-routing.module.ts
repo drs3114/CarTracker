@@ -7,7 +7,7 @@ import {AlertsComponent} from './components/alerts/alerts.component';
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'alerts/:vin', component: AlertsComponent}
+  {path: 'manage/:vin', component: AlertsComponent}
 ];
 
 @NgModule({

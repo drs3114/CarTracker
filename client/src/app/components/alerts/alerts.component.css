@@ -52,8 +52,12 @@ mat-slide-toggle {
   color: mediumvioletred;
 }
 
-.message{
+.message {
   padding-top: 50%;
   padding-bottom: 50%;
   background-color: darkgrey;
+}
+
+.adjust-controls {
+  padding-top: 1%;
 }
