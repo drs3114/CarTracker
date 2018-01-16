@@ -1,0 +1,9 @@
+.email-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-container > * {
+  width: 100%;
+  height: 100%;
+}
