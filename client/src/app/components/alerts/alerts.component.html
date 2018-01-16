@@ -1,4 +1,4 @@
-<div class="custom-container">
+<div *ngIf="car" class="custom-container">
   <div class="row adjust-fix custom-container">
     <div class="col">
       <mat-card class="card">
@@ -29,7 +29,8 @@
             <div class="col-md-2 button-row">
               <a class="float-right" mat-mini-fab color="accent" (click)="displayChart()"><i
                 class="fas fa-chart-line"></i></a>
-              <a class="float-right" mat-mini-fab color="accent"><i class="fas fa-envelope"></i></a>
+              <a class="float-right" mat-mini-fab color="accent" (click)="displayNotification()"><i
+                class="fas fa-envelope"></i></a>
             </div>
           </div>
         </mat-card-content>

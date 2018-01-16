@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import {Reading} from '../../models/reading';
 import {ReadingsService} from '../../services/readings.service';
 import {ChartComponent} from '../chart/chart.component';
+import {EmailComponent} from '../email/email.component';
 
 @Component({
   selector: 'app-alerts',
@@ -18,7 +19,7 @@ import {ChartComponent} from '../chart/chart.component';
 })
 export class AlertsComponent implements OnInit {
 
-  car: Car = new Car();
+  car: Car;
   highPriorityAlerts: Alert[] = [];
   mediumPriorityAlerts: Alert[] = [];
   lowPriorityAlerts: Alert[] = [];
@@ -126,6 +127,10 @@ export class AlertsComponent implements OnInit {
 
   displayChart(): void {
     this.dialog.open(ChartComponent, {width: '800px', data: this.readings});
+  }
+
+  displayNotification(): void {
+    this.dialog.open(EmailComponent, {width: '800px', data: this.car});
   }
 
   ngOnInit() {
