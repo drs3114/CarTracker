@@ -2,11 +2,11 @@
 <div class="jumbotron">
   <div class="email-container">
     <mat-form-field>
-      <input matInput placeholder="Enter your email" [formControl]="email" required>
+      <input matInput placeholder="Enter your email" [formControl]="email" required [(ngModel)]="from">
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Enter recipient's email" [formControl]="email" required>
+      <input matInput placeholder="Enter recipient's email" [formControl]="email" required [(ngModel)]="to">
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
@@ -17,7 +17,7 @@
     </mat-form-field>
   </div>
 
-  <div align="center">
+  <div *ngIf="from && to" align="center">
     <button mat-mini-fab color="primary" (click)="sendEmail()"><i class="far fa-paper-plane"></i></button>
   </div>
 </div>
