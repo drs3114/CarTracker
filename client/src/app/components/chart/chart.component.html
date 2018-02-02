@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-4">
+    <mat-form-field>
+      <mat-select placeholder="Chart for" [(ngModel)]="selectedValue" name="chart">
+        <mat-option *ngFor="let chart of chartTypes" [value]="chart.name">
+          {{chart.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4">
+    <mat-form-field>
+      <mat-select placeholder="Time Range" [(ngModel)]="chartTime" name="charttime">
+        <mat-option *ngFor="let time of timeRanges" [value]="time">
+          {{time}} Mins
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4">
+    <button *ngIf="selectedValue && chartTime" mat-raised-button color="accent"
+            (click)="viewChart(selectedValue,chartTime)">View
+    </button>
+    <button class="float-right" mat-mini-fab color="warn" (click)="close()"><i class="fas fa-times"></i>
+    </button>
+  </div>
+
+</div>
+<div *ngIf="viewing" class="row">
+  <div class="col-md-12">
+    <div style="display: block;">
+      <canvas baseChart width="400" height="300"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType">
+      </canvas>
+    </div>
+  </div>
+</div>

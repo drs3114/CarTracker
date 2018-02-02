@@ -1,0 +1,190 @@
+<div *ngIf="car" class="custom-container">
+  <div class="row adjust-fix custom-container">
+    <div class="col">
+      <mat-card class="card">
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title>{{car.make}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            <small>{{car.model}}</small>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div align="center" class="col-md-12">
+              <h5>VIN: <span class="badge badge-pill badge-primary">{{car.vin}}</span></h5>
+              Year: <span class="badge badge-pill badge-info">{{car.year}}</span>
+              Redline RPM: <span class="badge badge-pill badge-danger">{{car.redlineRpm}}</span>
+              Max fuel volume: <span class="badge badge-pill badge-info">{{car.maxFuelVolume}}</span>
+              Last service date: <span
+              class="badge badge-pill badge-success"> {{car.lastServiceDate.toLocaleString()}} </span>
+
+            </div>
+          </div>
+          <div class="adjust-controls row">
+            <div class="col-md-10">
+              <a mat-raised-button color="accent" routerLink="/dashboard">Dashboard</a>
+            </div>
+            <div class="col-md-2 button-row">
+              <a class="float-right" mat-mini-fab color="accent" (click)="displayChart()"><i
+                class="fas fa-chart-line"></i></a>
+              <a class="float-right" mat-mini-fab color="accent" (click)="displayNotification()"><i
+                class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row custom-container">
+    <div class="col-md-3" align="center">
+      <div class="row">
+        <div *ngIf="readingSelected" class="col">
+          <agm-map [latitude]="lat" [longitude]="long">
+            <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+          </agm-map>
+        </div>
+        <div *ngIf="!readingSelected" class="col message">
+          <mat-card>Select a reading to display Maps!</mat-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <mat-tab-group>
+        <mat-tab color="accent">
+          <ng-template mat-tab-label>
+            <span> High Priority Alerts</span>
+          </ng-template>
+          <div>
+            <table datatable [dtTrigger]="highAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of highPriorityAlerts">
+                <td><span class="badge badge-danger">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span> Medium Priority Alerts</span>
+          </ng-template>
+          <div>
+            <table datatable [dtTrigger]="mediumAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of mediumPriorityAlerts">
+                <td><span class="badge badge-warning">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span> Low Priority Alerts</span>
+          </ng-template>
+          <div>
+            <table datatable [dtTrigger]="lowAlertDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let alert of lowPriorityAlerts">
+                <td><span class="badge badge-dark">{{alert.time.toLocaleString()}}</span></td>
+                <td><span>{{alert.message}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span> Readings</span>
+          </ng-template>
+          <div>
+            <table datatable [dtTrigger]="readingsDtTrigger"
+                   class="table">
+              <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Fuel Volume</th>
+                <th scope="col">Speed</th>
+                <th scope="col">Engine HP</th>
+                <th scope="col">Engine Light</th>
+                <th scope="col">Engine Coolant Low</th>
+                <th scope="col">Cruise Control</th>
+                <th scope="col">Engine RPM</th>
+                <th scope="col">Tires</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let reading of readings" (click)="updateMaps(reading)">
+                <td><span class="badge badge-success">{{reading.timestamp.toLocaleString()}}</span></td>
+                <td><span>{{reading.fuelVolume}}</span></td>
+                <td><span>{{reading.speed}}</span></td>
+                <td><span>{{reading.engineHp}}</span></td>
+                <td>
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked={{reading.checkEngineLightOn}}
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked={{reading.engineCoolantLow}}
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    <mat-slide-toggle
+                      color="accent"
+                      checked={{reading.cruiseControlOn}}
+                      disabled="true">
+                    </mat-slide-toggle>
+                  </span>
+                </td>
+                <td><span>{{reading.engineRpm}}</span></td>
+                <td>
+                  <code>{{reading.tires.frontRight}}</code>
+                  <code>{{reading.tires.frontLeft}}</code>
+                  <code>{{reading.tires.rearRight}}</code>
+                  <code>{{reading.tires.rearLeft}}</code>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+</div>

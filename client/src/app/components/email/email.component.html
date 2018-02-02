@@ -1,0 +1,23 @@
+<button class="float-right" mat-mini-fab color="warn" (click)="close()"><i class="fas fa-times"></i></button>
+<div class="jumbotron">
+  <div class="email-container">
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" [formControl]="email" required [(ngModel)]="from">
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter recipient's email" [formControl]="email" required [(ngModel)]="to">
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Subject" value="{{subject}}">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Enter message" value="{{body}}"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="from && to" align="center">
+    <button mat-mini-fab color="primary" (click)="sendEmail()"><i class="far fa-paper-plane"></i></button>
+  </div>
+</div>
